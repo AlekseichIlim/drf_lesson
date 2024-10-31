@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from vehicle.models import Car, Moto, Milage
+from vehicle.services import convert_cur
 from vehicle.validators import TitleValidator
 
 
@@ -17,10 +18,14 @@ class CarSerializer(serializers.ModelSerializer):
     # milage = MilageSerializer(source='milage_set', many=True)
     # milage_set выводить не надо после вложения реалайзера milage в реалайзер Car
     milage = MilageSerializer(many=True, read_only=True)
+    usd_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Car
         fields = '__all__'
+
+    def get_usd_price(self, obj):
+        return convert_cur(obj.amount)
 
 
 class MotoSerializer(serializers.ModelSerializer):
