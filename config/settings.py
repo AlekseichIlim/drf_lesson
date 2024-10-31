@@ -13,7 +13,7 @@ from datetime import timedelta
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,10 +91,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'catalog',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': '1001',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
+        # название db название сервиса из файла docker-compose
         'PORT': '5432',
     }
 }
